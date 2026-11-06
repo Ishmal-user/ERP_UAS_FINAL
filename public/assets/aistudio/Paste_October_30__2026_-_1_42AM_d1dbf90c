@@ -1,0 +1,896 @@
+# MASTER PROMPT — HOTEL ARUNIKA SENJA ERP
+## UI/UX DESIGN, BUSINESS WORKFLOWS, ROLE ACCESS, DATA, AND TESTING
+
+Act as a Senior ERP Product Designer, Business Analyst, Full-Stack Developer, and QA Engineer.
+
+Build and improve the existing **Hotel Arunika Senja ERP Hospitality Web Application** based on the provided assignment document, “ERP Hospitality — Skenario,” and its reference wireframes.
+
+This is a university Information Systems project referencing the Odoo Web Version 17.0 interface. Create an original implementation inspired by Odoo's business workflow conventions. Do not copy Odoo source code or proprietary assets.
+
+**The final application must be a working web application, not merely a static UI prototype.** It must support persistent data, connected business transactions, role-based access, auditable changes, reproducible tests, and public deployment.
+
+If an existing project is available, inspect and update it instead of creating a separate project. Preserve working features and existing data where possible.
+
+---
+
+# 1. PROJECT CONTEXT
+
+Company: Hotel Arunika Senja  
+Industry: Boutique hospitality and corporate amenity sales  
+Location: Central Jakarta, Indonesia  
+Currency: Indonesian Rupiah (IDR)  
+Hotel capacity: 8 rooms  
+Company workforce in the scenario: 18 employees  
+Warehouse locations: WH-JKT and MB-JKT  
+Project duration: 4 weeks  
+Reference interface: Odoo Web Version 17.0, desktop browser
+
+The hotel handles:
+- Room reservations and room-night availability.
+- Guest check-in and check-out.
+- Minibar consumption and guest folios.
+- Corporate leads, quotations, and sales orders.
+- Warehouse inventory and stock reservations.
+- Purchase orders and receipt inspection.
+- Customer invoices and vendor bills.
+- Partial payments and outstanding balances.
+- Accounting journals, taxes, and reports.
+- Return inspections and credit notes.
+- Audit logs and role-based permissions.
+
+The business must operate as an integrated ERP system. Do not implement each module as an isolated page.
+
+# 2. VISUAL DESIGN SYSTEM
+
+Create a premium boutique hotel interface combined with a professional enterprise ERP dashboard.
+
+## Color palette
+
+Sidebar:
+- Main background: `#0B2342`
+- Hover background: `#16365C`
+- Active menu background: `#17385F`
+- Active menu accent: `#D6A72C`
+- Inactive text: `#CBD5E1`
+- Inactive icons: `#94A3B8`
+- Divider: `#29415E`
+
+Main interface:
+- Application background: `#F7F7F4`
+- Cards: `#FFFFFF`
+- Primary text: `#172B45`
+- Secondary text: `#64748B`
+- Borders: `#E5E7EB`
+- Input borders: `#D9E0E8`
+
+Brand accents:
+- Champagne gold: `#D6A72C`
+- Gold hover: `#B98A16`
+- Success background: `#E8F4EC`
+- Warning background: `#FFF5D9`
+- Error background: `#FDECEC`
+- Information background: `#EAF2FC`
+
+Use Inter or a similar modern font.
+
+## Layout
+
+- Desktop-first browser layout, reference size 1440 × 900.
+- Fixed left sidebar.
+- White top navigation bar.
+- Breadcrumbs and page titles.
+- Consistent search, filter, Group By, and view controls.
+- Rounded cards with subtle borders.
+- Professional tables and compact status badges.
+- Responsive tablet layouts.
+- Consistent spacing and typography across every module.
+
+Use gold selectively for active states, key highlights, and important actions. Keep primary buttons navy.
+
+## Odoo-inspired interaction conventions
+
+Where appropriate, implement:
+- Home app switcher.
+- List, Kanban, Form, and Activity views.
+- Search, Filters, and Group By controls.
+- Document status bars.
+- Unique document sequences.
+- Multi-line transaction forms.
+- Tax, subtotal, and total calculations.
+- Log Notes and audit history.
+- Smart buttons linking related documents.
+
+Use appropriate lifecycle statuses such as Draft → Confirmed → Done or Posted. The precise transitions must follow the business process.
+
+# 3. APPLICATION NAVIGATION
+
+Create these application areas:
+
+1. Home / Dashboard.
+2. Sales.
+3. CRM.
+4. Purchase.
+5. Inventory.
+6. Accounting.
+7. Invoicing.
+8. Front Desk.
+9. Reports.
+10. Audit Log.
+11. Settings, if authorized.
+
+The sidebar must be generated according to the signed-in user's permissions.
+
+Every menu item must open a working page. Hide unauthorized modules and prevent unauthorized direct navigation and actions.
+
+# 4. ROLE-BASED ACCESS CONTROL
+
+Implement at least these four mandatory application roles:
+
+- Sales.
+- Warehouse / Housekeeping.
+- Finance.
+- Front Desk.
+
+Additional roles:
+- Owner.
+- Procurement.
+
+Do not confuse the four student team-member assignments in the PDF with the application's business-user roles.
+
+## Owner
+
+Access:
+- Dashboard.
+- Sales and CRM.
+- Purchase.
+- Inventory.
+- Accounting and Invoicing.
+- Front Desk.
+- Reports.
+- Audit Log.
+- Settings.
+
+Permissions:
+- View cross-module business performance.
+- Review transactions and reports.
+- Authorize exceptional overbooking through a recorded approval workflow.
+- Access audit history and related documents.
+
+## Sales
+
+Access:
+- Sales.
+- CRM.
+- Customer profiles.
+- Quotations.
+- Sales Orders.
+- Relevant delivery and invoice status.
+
+Permissions:
+- Manage leads and opportunities.
+- Create quotations.
+- Confirm eligible Sales Orders.
+- Apply discounts up to 10%.
+- Review customer payment terms and authorized credit information.
+
+Restrictions:
+- Cannot change customer credit limits without Finance authorization.
+- Cannot modify prices or discounts on confirmed orders directly.
+- Cannot bypass credit exposure checks.
+
+## Warehouse / Housekeeping
+
+Access:
+- Inventory.
+- Stock Overview.
+- Stock Moves.
+- Internal Transfers.
+- Authorized Delivery Orders.
+- Housekeeping dashboard.
+- Room Board.
+- Dirty Rooms and housekeeping tasks.
+
+Permissions:
+- Perform authorized stock transfers.
+- Validate available stock before issuing goods.
+- Process deliveries and return inspections within the authorized workflow.
+- Update cleaning status and record inspection notes.
+
+Restrictions:
+- Cannot issue stock beyond available quantity.
+- Cannot post accounting journals.
+- Only authorized Housekeeping users may transition a room from Dirty to Ready, with inspection notes and audit history.
+
+## Finance
+
+Access:
+- Invoicing.
+- Accounting.
+- Customer Invoices.
+- Vendor Bills.
+- Payments.
+- Credit Notes.
+- Accounts Receivable and Accounts Payable.
+- Journal Entries.
+- General Ledger.
+- Financial Reports.
+- Audit Log.
+
+Permissions:
+- Post eligible customer invoices and vendor bills.
+- Register partial or full payments.
+- Validate accounting entries.
+- Review credit exposure.
+- Access and update customer credit limits where authorized.
+- Reconcile residual balances and review tax postings.
+
+Restrictions:
+- Cannot directly change physical stock quantities.
+- Cannot directly mark a Dirty room as Ready.
+
+## Front Desk
+
+Access:
+- Front Desk.
+- Room Board.
+- Bookings.
+- Guest information.
+- Check-in and check-out.
+- Guest Folio.
+- Minibar consumption.
+
+Permissions:
+- Create and manage reservations.
+- Check room availability.
+- Perform check-in and check-out.
+- Record minibar consumption after checking available MB-JKT stock.
+- View folio charges and relevant invoice status.
+
+Restrictions:
+- Cannot post accounting journals.
+- Cannot change credit limits.
+- Cannot bypass stock availability.
+- Cannot transition Dirty rooms to Ready without Housekeeping authorization.
+
+## Procurement
+
+Access:
+- Purchase.
+- Vendors.
+- RFQs.
+- Purchase Orders.
+- Receipts and accepted quantities.
+- Relevant inventory visibility.
+
+Permissions:
+- Create RFQs and purchase orders.
+- Track partial deliveries.
+- Inspect receipt and outstanding quantities.
+- Initiate vendor bill workflows based on eligible accepted goods.
+
+Restrictions:
+- Cannot approve rejected goods without the appropriate authorization.
+- Cannot create a bill exceeding eligible accepted quantities.
+- Cannot post payments without Finance permission.
+
+## Permission implementation
+
+Centralize permissions in a configuration such as `rolePermissions.js`.
+
+Use reusable components such as:
+- `RoleBasedRoute`.
+- `PermissionGuard`.
+- `RoleSidebar`.
+- `RoleDashboard`.
+
+Support View, Create, Edit, Confirm, Approve, Post, and Delete permissions.
+
+Denied actions must display a clear message and create an audit event where appropriate.
+
+If a frontend prototype is used during development, clearly distinguish simulated permissions from production authorization. The deployed application must enforce permissions on the server or equivalent trusted backend.
+
+# 5. DASHBOARD — TRANSACTIONAL, NOT STATIC
+
+Create a dashboard inspired by the reference wireframe S-18.
+
+Display:
+- Revenue Posted.
+- COGS Posted.
+- AR Residual.
+- Payments Received.
+- AP Residual.
+- Available Stock.
+- Occupancy by night.
+
+Include:
+- Revenue trends.
+- Occupancy calendar or chart.
+- Recent transactions.
+- Open customer invoices.
+- Low-stock alerts.
+- Arrivals and departures.
+- Recent activity and audit events.
+
+Use a Posted-only filter and an appropriate reporting date.
+
+Every KPI must be calculated from real persisted transaction records and support drill-down to the source documents.
+
+For example, the documented T-38 fixture requires:
+- Revenue: Rp183,000.
+- COGS: Rp66,000.
+- AR residual: Rp103,130.
+- Payments received: Rp100,000.
+
+Do not hardcode these as permanent dashboard values. Reproduce them through the applicable transaction fixture.
+
+# 6. CUSTOMER AND VENDOR MASTER DATA
+
+Use the customer and vendor data from the assignment document.
+
+## Customers
+
+| ID | Customer | City | Credit limit | Terms |
+|---|---|---|---:|---|
+| C01 | PT Nusantara Event | Jakarta | Rp5,000,000 | Net 14 |
+| C02 | PT Seruni Travel | Bandung | Rp3,000,000 | Net 7 |
+| C03 | Ratna Prawira | Jakarta | Rp0 | Due Now |
+| C04 | PT Garuda Konsultan | Jakarta | Rp8,000,000 | Net 30 |
+| C05 | Yudha Prasetyo | Tangerang | Rp0 | Due Now |
+| C06 | PT Hotel Partnerindo | Bekasi | Rp4,000,000 | Net 14 |
+
+## Vendors
+
+| ID | Vendor | City | Terms |
+|---|---|---|---|
+| V01 | PT Tirta Distribusi | Jakarta | Net 14 |
+| V02 | PT Camilan Nusantara | Tangerang | Net 14 |
+| V03 | PT Prima Amenitas | Bekasi | Net 30 |
+| V04 | PT Tekstil Hotelindo | Bandung | Net 30 |
+
+Use these exact IDs and values in the initial dataset.
+
+Customer forms must display city, credit limit, payment terms, and relevant related documents. Vendor forms must show purchase orders, receipts, and vendor bills.
+
+# 7. INVENTORY AND PRODUCT MASTER
+
+Implement all 15 stockable SKU variants from the assignment. Preserve the exact SKU, name, size, color, unit, sales price, standard cost, default vendor, and vendor pricelist.
+
+| SKU | Product | Unit | Sales price | Standard cost | Vendor |
+|---|---|---|---:|---:|---|
+| MB-WTR-330 | Air mineral 330 ml | Botol | Rp18,000 | Rp6,000 | V01 |
+| MB-SODA-CAN | Soda kaleng | Kaleng | Rp25,000 | Rp10,000 | V01 |
+| MB-JUICE-250 | Jus buah kotak | Kotak | Rp28,000 | Rp12,000 | V01 |
+| MB-CHIP-SALT | Keripik original | Bungkus | Rp22,000 | Rp8,000 | V02 |
+| MB-CHIP-SPCY | Keripik pedas | Bungkus | Rp24,000 | Rp9,000 | V02 |
+| MB-CHOC-DARK | Cokelat hitam | Batang | Rp30,000 | Rp14,000 | V02 |
+| MB-CHOC-MILK | Cokelat susu | Batang | Rp30,000 | Rp13,000 | V02 |
+| AM-SOAP-LAV | Sabun lavender | Batang | Rp18,000 | Rp7,000 | V03 |
+| AM-SOAP-CIT | Sabun citrus | Batang | Rp18,000 | Rp7,000 | V03 |
+| AM-SHMP-50 | Sampo tamu | Botol | Rp25,000 | Rp12,000 | V03 |
+| AM-BRUSH | Sikat gigi tamu | Set | Rp16,000 | Rp5,000 | V03 |
+| AM-SLIPPER | Sandal hotel | Pasang | Rp35,000 | Rp14,000 | V03 |
+| HK-TOWEL-W | Handuk mandi putih | Pcs | Rp85,000 | Rp43,000 | V04 |
+| HK-TOWEL-G | Handuk mandi abu | Pcs | Rp85,000 | Rp45,000 | V04 |
+| HK-LINEN-SET | Set linen kamar | Set | Rp210,000 | Rp120,000 | V04 |
+
+Use the exact opening stock from the PDF.
+
+| SKU | WH-JKT | MB-JKT | Company total |
+|---|---:|---:|---:|
+| MB-WTR-330 | 120 | 30 | 150 |
+| MB-SODA-CAN | 70 | 20 | 90 |
+| MB-JUICE-250 | 60 | 20 | 80 |
+| MB-CHIP-SALT | 80 | 15 | 95 |
+| MB-CHIP-SPCY | 70 | 15 | 85 |
+| MB-CHOC-DARK | 45 | 10 | 55 |
+| MB-CHOC-MILK | 50 | 10 | 60 |
+| AM-SOAP-LAV | 80 | 15 | 95 |
+| AM-SOAP-CIT | 70 | 15 | 85 |
+| AM-SHMP-50 | 55 | 15 | 70 |
+| AM-BRUSH | 70 | 10 | 80 |
+| AM-SLIPPER | 50 | 10 | 60 |
+| HK-TOWEL-W | 30 | 4 | 34 |
+| HK-TOWEL-G | 25 | 4 | 29 |
+| HK-LINEN-SET | 16 | 2 | 18 |
+
+Control baseline:
+- Total units: 1,086.
+- Total inventory value: Rp14,102,000.
+- WH-JKT value: Rp11,785,000.
+- MB-JKT value: Rp2,317,000.
+
+Existing Sales Order SO00007 reserves 4 units of MB-WTR-330 and 2 units of MB-SODA-CAN in MB-JKT:
+- Water: On Hand 30, Reserved 4, Available 26.
+- Soda: On Hand 20, Reserved 2, Available 18.
+
+Reservations must not reduce On Hand or inventory valuation.
+
+## Inventory UI
+
+Create:
+- Stock Overview.
+- Stock Moves.
+- Product Form.
+- Internal Transfer Form.
+- Delivery Orders.
+- Receipt records.
+- Return Inspection.
+
+Display On Hand, Reserved, Available, location, standard cost, inventory value, and movement history.
+
+Calculate:
+
+Available Qty = On Hand − Reserved.
+
+Never allow negative stock. Transfers must reduce the source location and increase the destination by the same quantity. Total company units and inventory value must remain unchanged during internal transfers.
+
+# 8. ROOM MASTER AND BOOKING MANAGEMENT
+
+Use the exact hotel room master:
+
+| Room | Type | Rate per night | Initial status |
+|---|---|---:|---|
+| R101 | Superior | Rp550,000 | Ready |
+| R102 | Superior | Rp550,000 | Ready |
+| R103 | Deluxe | Rp750,000 | Ready |
+| R104 | Deluxe | Rp750,000 | Dirty |
+| R105 | Superior | Rp550,000 | Ready |
+| R106 | Superior | Rp550,000 | Ready |
+| R107 | Deluxe | Rp750,000 | Ready |
+| R108 | Deluxe | Rp750,000 | Ready |
+
+Existing booking B00003:
+- Customer: C05.
+- Room: R102.
+- Dates: 24–26 October.
+- Duration: 2 nights.
+- Status: Confirmed.
+- No AR or revenue is recognized before checkout.
+
+## Front Desk screens
+
+Implement:
+- Room Board.
+- Booking Calendar.
+- Booking List.
+- Booking Form.
+- Guest Profile.
+- Check-in / Check-out.
+- Guest Folio.
+- Minibar Consumption.
+- Room Cleaning and Inspection.
+
+Display both:
+- Available to Book.
+- Ready for Check-in.
+
+A Dirty room may be available for booking but is not ready for check-in.
+
+Use room-night intervals `[check-in, check-out)`. A checkout date is not an occupied night.
+
+Prevent overlapping Confirmed or Checked In bookings for the same room-night.
+
+Room rates:
+- Superior: Rp550,000 per night.
+- Deluxe: Rp750,000 per night.
+
+Calculate room charges from the confirmed rate and number of nights. A confirmed rate or date change requires a recorded rescheduling workflow.
+
+An Owner-authorized overbooking exception, if implemented, must retain the approval history and must not silently create overlapping confirmed bookings.
+
+After checkout, change the room to Dirty. Only authorized Housekeeping can transition Dirty → Ready after cleaning and inspection, with an audit record.
+
+# 9. SALES AND CRM
+
+Implement the full Order to Cash process:
+
+Lead → Opportunity → Quotation → Sales Order → Delivery Order → Customer Invoice → Payment.
+
+Required screens:
+- CRM Pipeline.
+- Customers.
+- Quotations.
+- Sales Orders.
+- Delivery Orders.
+- Related Customer Invoices.
+
+Seed Lead L00004:
+- Customer: C02.
+- Stage: New.
+- Expected value: Rp1,200,000.
+- No stock or accounting impact.
+
+Seed Sales Order SO00007:
+- Customer: C01.
+- Status: Confirmed.
+- Lines: 4 × MB-WTR-330 and 2 × MB-SODA-CAN.
+- Net amount: Rp122,000.
+- Stock reserved in MB-JKT.
+- No delivery completed and no AR recognized.
+
+## Business rules
+
+1. Maximum discount is 10%.
+2. A 15% discount must be rejected.
+3. Confirmed order prices and discounts are locked.
+4. Changes after confirmation require cancellation and a new document, with an audit trail.
+5. Credit exposure must include outstanding AR, active uninvoiced Sales Orders, and the proposed new order.
+6. Reject an order when exposure exceeds the customer's credit limit.
+7. Confirmation must reserve eligible stock.
+8. Partial deliveries must preserve outstanding quantities and create a backorder.
+9. Invoice eligible delivered quantities only.
+
+# 10. PURCHASE AND RECEIPT INSPECTION
+
+Implement the Procure to Pay process:
+
+Reordering / RFQ → Purchase Order → Receipt (Accepted Qty) → Vendor Bill → Payment.
+
+Required screens:
+- Vendors.
+- RFQs.
+- Purchase Orders.
+- Receipts.
+- Receipt Inspection.
+- Backorders.
+- Vendor Bills.
+- Payment Status.
+
+Seed Purchase Order PO00007:
+- Vendor: V02.
+- Status: Confirmed.
+- 10 × MB-CHIP-SALT at Rp8,000 each.
+- Not yet received.
+- No AP recognized.
+
+At receipt, track:
+- Ordered Qty.
+- Received Qty.
+- Accepted Qty.
+- Rejected Qty.
+- Outstanding Qty.
+- Backorder Qty.
+
+Only accepted goods increase stock. Rejected goods must not increase stock or be recognized as payable.
+
+Vendor bills must not exceed the value of accepted quantities that have not already been billed.
+
+Use three-way matching between Purchase Order, Receipt, and Vendor Bill.
+
+Support partial receipts and multiple eligible vendor bills without double-billing previously billed quantities.
+
+# 11. CUSTOMER INVOICES, VENDOR BILLS, AND PAYMENTS
+
+Implement:
+- Customer Invoices.
+- Vendor Bills.
+- Register Payment.
+- Credit Notes.
+- Accounts Receivable.
+- Accounts Payable.
+
+Every document must have:
+- Unique document number.
+- Partner.
+- Date.
+- Related source documents.
+- Transaction lines.
+- Tax.
+- Subtotal.
+- Total.
+- Paid amount.
+- Residual amount.
+- Status and posting history.
+
+Customer Invoice for inventory goods:
+
+Eligible billable quantity = Delivered Qty − Previously Invoiced Qty.
+
+If the result is zero or negative, do not create another invoice line.
+
+Booking alone must not create hotel AR or tax. Hotel billing happens at checkout.
+
+Payments must satisfy:
+
+0 < Payment Amount ≤ Residual Amount.
+
+A payment updates the related invoice or bill, residual balance, bank account, and accounting journal. Repeated payment requests must not create duplicate postings.
+
+Support partial payments, full payments, and accurate residual balances.
+
+# 12. TAX CONFIGURATION
+
+Use the tax assumptions stated in the assignment document.
+
+## PBJT_HOTEL_10
+
+- Context: Room-night and minibar associated with a guest stay.
+- Effective rate: 10%.
+- Tax account: 2160 — Utang PBJT Hotel.
+- Do not add PPN to these hotel services under the assignment assumptions.
+
+## PPN_B2B_11
+
+- Context: Independent B2B goods sales and taxable goods purchases in this simulation.
+- Formal rate: 12%.
+- Tax base factor: 11/12.
+- Effective rate: 11%.
+- Output tax account: 2150.
+- Input tax account: 1300.
+
+## NO_TAX
+
+- Context: Reservations and internal stock transfers.
+- Effective rate: 0%.
+
+Round tax per transaction line to the nearest whole Rupiah. Store amounts as integer Rupiah or use an appropriate decimal representation that avoids floating-point rounding errors.
+
+# 13. HOSPITALITY FOLIO AND MINIBAR
+
+Implement:
+
+Room Board → Booking → Check-in → Minibar / Folio → Check-out → Customer Invoice → Payment.
+
+Folio must contain:
+- Room charges.
+- Minibar items.
+- Quantities.
+- Unit prices.
+- Applicable tax.
+- Total charges.
+- Payments.
+- Residual balance.
+
+Every minibar issue must check Available Qty in MB-JKT.
+
+If a request exceeds available stock, reject it without changing stock, folio, or accounting balances.
+
+For the documented test scenario:
+- 2 water bottles + 1 soda can.
+- Minibar sales value: Rp61,000.
+- COGS: Rp22,000.
+
+For a two-night Deluxe stay with that minibar fixture:
+- Room charge: Rp1,500,000.
+- Minibar charge: Rp61,000.
+- PBJT: Rp156,100.
+- Total folio: Rp1,717,100.
+
+On checkout, finalize the folio, post the relevant charges and tax, and change the room status to Dirty.
+
+# 14. RETURNS AND CREDIT NOTES
+
+Implement:
+
+Return Inspection → Return Stock Move → Credit Note → AR Adjustment.
+
+Rules:
+1. Return quantity cannot exceed the quantity delivered minus quantities already returned.
+2. Returned goods only enter stock after inspection and acceptance.
+3. Accepted returns reverse the relevant COGS and inventory value.
+4. Credit Notes reduce customer AR and the related tax.
+5. Rejected returns do not increase inventory.
+6. All changes must be auditable.
+
+For the documented test:
+- Return 1 eligible water bottle.
+- Credit Note: Rp19,980.
+- Reverse COGS: Rp6,000.
+
+Use the applicable original transaction values and tax rules.
+
+# 15. ACCOUNTING AND GENERAL LEDGER
+
+Use the chart of accounts from the assignment:
+
+| Code | Account | Type |
+|---|---|---|
+| 1000 | Bank | Asset |
+| 1100 | Piutang Usaha / AR | Asset |
+| 1200 | Persediaan Barang | Asset |
+| 1250 | Stock Interim / GRNI | Asset / Clearing |
+| 1300 | PPN Masukan | Asset |
+| 2100 | Utang Usaha / AP | Liability |
+| 2150 | PPN Keluaran | Liability |
+| 2160 | Utang PBJT Hotel | Liability |
+| 3100 | Modal Awal | Equity |
+| 4100 | Pendapatan Barang B2B | Revenue |
+| 4110 | Pendapatan Kamar | Revenue |
+| 4120 | Pendapatan Minibar | Revenue |
+| 5100 | Harga Pokok Penjualan / COGS | Expense |
+| 5200 | Biaya Housekeeping | Expense |
+| 5300 | Potongan Penjualan | Contra Revenue |
+| 5400 | Selisih Persediaan | Expense |
+
+Opening balances:
+- Bank: Rp30,000,000.
+- AR: Rp0.
+- AP: Rp0.
+- Inventory: Rp14,102,000.
+- Stock Interim and taxes: Rp0.
+
+Opening journal:
+- Debit Bank: Rp30,000,000.
+- Debit Inventory: Rp14,102,000.
+- Credit Modal: Rp44,102,000.
+
+Total debit must equal total credit: Rp44,102,000.
+
+The opening journal is not a test transaction. SO00007, PO00007, and B00003 must not be recognized as revenue or liabilities before their required business events.
+
+## Posting rules
+
+- Every journal must balance.
+- Every posting must use a unique reference.
+- Repeating the same posting request must not produce a second journal.
+- Delivery Done posts COGS at standard cost for the quantity completed, once.
+- Receipt increases inventory and Stock Interim according to the simulation policy.
+- Invoices and vendor bills post AR/AP and applicable taxes.
+- Payments reduce the relevant residual and update Bank.
+- Returns reverse the appropriate inventory, COGS, receivable, and tax effects.
+
+Provide a Journal Entries screen and General Ledger drill-down.
+
+# 16. AUDIT LOG AND DOCUMENT RELATIONSHIPS
+
+Every relevant change to status, money, stock, discounts, dates, and permissions must record:
+- Actor.
+- Timestamp.
+- Action.
+- Document reference.
+- Field changed.
+- Old value.
+- New value.
+- Outcome.
+- Idempotency or transaction reference when relevant.
+
+Include:
+- Booking changes.
+- Price and discount attempts.
+- Credit limit changes.
+- Stock reservations.
+- Deliveries.
+- Receipts.
+- Internal transfers.
+- Minibar issues.
+- Invoice and payment postings.
+- Returns.
+- Journal postings.
+- Denied or rejected actions.
+
+Provide related-document links, smart buttons, and transaction history.
+
+A user must be able to trace a financial KPI back through the source document chain, such as:
+
+SO → Delivery Order → Customer Invoice → Payment → Journal Entry.
+
+Do not fabricate audit entries for successful actions that never happened. Log actual actions and rejected attempts.
+
+# 17. REQUIRED SCREENS AND WIREFRAMES
+
+Use the assignment's S-01 through S-18 screens as the reference for required structure and fields.
+
+At minimum, include:
+- S-01: Home and app switcher.
+- S-02: Customer and credit terms.
+- S-03: Product and SKU variants.
+- S-04: CRM pipeline.
+- S-05: Quotations and Sales Orders.
+- S-06: Delivery Orders.
+- S-07: Stock transfers and availability.
+- S-08: RFQs and Purchase Orders.
+- S-09: Receipt inspection.
+- S-10: Customer Invoices.
+- S-11: Vendor Bills.
+- S-12: Payments.
+- S-13: Accounting and journals.
+- S-14: Room Board and housekeeping.
+- S-15: Booking management.
+- S-16: Guest Folio, minibar, and checkout.
+- S-17: Return inspection and Credit Notes.
+- S-18: Transactional Dashboard and Audit Log.
+
+Maintain consistent layouts and navigation across screens. The visual design may be customized, but the required structure and business fields must be preserved.
+
+# 18. REQUIRED ACCEPTANCE TESTS
+
+Execute every test T-01 through T-39 defined in the assignment document.
+
+The test runner or test report must record:
+- Test ID.
+- Feature and source SR rule.
+- Fixture or baseline.
+- Preconditions.
+- Action.
+- Expected result.
+- Actual result.
+- Pass / Fail.
+- Evidence reference.
+
+Do not claim a test passed unless it was executed and its outcome verified.
+
+Important numeric acceptance examples include:
+
+- T-05: MB-WTR-330 stock total 150 and standard cost Rp6,000.
+- T-09: 10 water bottles + 5 soda cans produce subtotal Rp305,000 and total Rp338,550.
+- T-11: A C02 order for 15 linen sets with gross value Rp3,496,500 exceeds the Rp3,000,000 credit limit.
+- T-12: Partial delivery of 6 water bottles and 3 soda cans leaves a backorder of 4 water bottles and 2 soda cans.
+- T-12/T-14: Delivery COGS is Rp66,000, posted once.
+- T-20: Eligible customer invoice subtotal Rp183,000, PPN Rp20,130, total Rp203,130.
+- T-22: Accepted goods of Rp188,000 produce PPN Rp20,680 and vendor bill total Rp208,680.
+- T-24: A Rp100,000 payment against the Rp203,130 invoice leaves AR residual Rp103,130.
+- T-29: On 24 October, one room is booked and seven are not booked; R104 remains Dirty.
+- T-31: R103 booked from 27–29 October has two nights and room charge Rp1,500,000 before PBJT.
+- T-33: Minibar consumption and COGS follow the quantities and values defined by the test fixture.
+- T-35: A valid two-night Deluxe stay with the specified minibar fixture totals Rp1,717,100 including PBJT of Rp156,100.
+- T-38: Dashboard after the required fixture displays revenue Rp183,000, COGS Rp66,000, AR residual Rp103,130, and collected payments Rp100,000.
+- T-39: Dashboard drill-down and audit history link the correct documents and prevent duplicate postings.
+
+When a test requires a prior fixture, reset to the defined baseline or explicitly create the required fixture. Do not allow unrelated test results to accumulate silently.
+
+Consult the complete assignment document for the exact conditions and evidence requirements of all 39 tests.
+
+# 19. TECHNICAL REQUIREMENTS
+
+Build a real web application with:
+- Persistent database storage.
+- A functioning backend or equivalent trusted transaction service.
+- Server-side validation of critical business rules.
+- Unique document sequences.
+- Transactional stock and accounting updates.
+- Authentication and authorization for each role.
+- Reproducible seed data.
+- Automated or documented acceptance tests.
+- Public deployment.
+- A public URL and test accounts for grading.
+
+A React-based frontend is acceptable. Use the existing project's stack when practical. If a backend is needed, choose a compatible persistent database and API implementation rather than replacing the project unnecessarily.
+
+Use database transactions or equivalent safeguards for operations that affect multiple records. Prevent duplicate posting with idempotency controls, unique references, and appropriate status validation.
+
+Do not rely on localStorage alone for the final multi-user application. It may be used for noncritical UI preferences, but the business records must persist reliably after refresh and through the deployed application.
+
+Keep the source code original. Do not copy Odoo source code or assets.
+
+# 20. DEVELOPMENT AND DELIVERY ORDER
+
+Implement in this order:
+
+Phase 1 — Inspect the existing project, establish the data model, seed data, and role permissions.
+
+Phase 2 — Build the shared layout, sidebar, app switcher, login, and navigation.
+
+Phase 3 — Implement Customers, Products, Inventory, Sales, CRM, Purchase, and Receipts.
+
+Phase 4 — Implement Delivery Orders, customer invoicing, vendor bills, payments, returns, and accounting posting.
+
+Phase 5 — Implement Front Desk, Booking, Guest Folio, Minibar, and Housekeeping.
+
+Phase 6 — Implement transactional Dashboard, Reports, Audit Log, and document drill-down.
+
+Phase 7 — Execute T-01 through T-39, fix failures, and collect evidence.
+
+Phase 8 — Deploy the application and verify the public URL, persistence, and test accounts.
+
+Prioritize all Must requirements before Should or Optional features.
+
+# 21. FINAL DEFINITION OF DONE
+
+The project is complete only when:
+
+1. Order to Cash works from Lead/Quotation through Sales Order, delivery, invoice, and payment.
+2. Procure to Pay works from RFQ through Purchase Order, receipt, vendor bill, and payment.
+3. Front Desk connects bookings, room status, minibar stock, folio, checkout, tax, and accounting.
+4. Return inspection, stock reversal, Credit Note, and AR adjustment work.
+5. All relevant SR-xx business rules are enforced.
+6. Data persists after refresh.
+7. Duplicate postings are prevented.
+8. Dashboard KPIs can be traced to source documents.
+9. Role permissions are enforced.
+10. All 39 acceptance tests are executed and their results recorded.
+11. Evidence is prepared for the required screens and test outcomes.
+12. The application is deployed with a public URL and test accounts for each role.
+
+Do not stop after producing the visual design. Implement, integrate, test, and verify the working business processes.
+
+If a feature cannot be completed, state precisely what remains incomplete instead of claiming full compliance.

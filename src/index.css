@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Previous Arunika Senja Navy & Gold Palette */
+    --navy-primary: #0B2342;
+    --navy-secondary: #1E2A3A;
+    --navy-hover: #163454;
+    --navy-dark: #08172C;
+    --gold-accent: #D8AD43;
+    --gold-champagne: #C6A66B;
+    --gold-light: #FBF4E4;
+    --bg-ivory: #FAF9F6;
+    --text-dark: #0B2342;
+    --text-slate: #1E293B;
+    --border-light: #E2E8F0;
+
+    /* Semantic fallback tokens */
+    --color-espresso: #0B2342;
+    --color-dark-chocolate: #1E2A3A;
+    --color-mocha: #475569;
+    --color-champagne-gold: #C6A66B;
+    --color-soft-gold: #D8AD43;
+    --color-ivory: #FAF9F6;
+    --color-cream: #F8F9FA;
+    --color-sand: #E2E8F0;
+    --color-taupe: #64748B;
+    --color-white: #FFFFFF;
+
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    background-color: #FAF9F6;
+    color: #1E293B;
+  }
+
+  h1, h2, h3, h4, .font-serif-luxury {
+    font-family: var(--font-serif);
+  }
+}
+
+.font-serif-luxury {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-mono-numbers {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Palette Utilities */
+.bg-navy { background-color: #0B2342; }
+.bg-navy-dark { background-color: #08172C; }
+.bg-navy-secondary { background-color: #1E2A3A; }
+.bg-gold { background-color: #C6A66B; }
+.bg-gold-light { background-color: #FBF4E4; }
+.bg-ivory { background-color: #FAF9F6; }
+.border-sand { border-color: #E2E8F0; }
+.text-gold { color: #C6A66B; }
+.text-navy { color: #0B2342; }
+
+/* Custom crisp scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Hotel Arunika Senja ERP",
+  "description": "Sistem ERP Manajemen Hotel Butik Terpadu - Front Desk, Booking, Folio & Minibar, Sales, Inventory, Purchase, Invoicing, Accounting & Audit Log.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
